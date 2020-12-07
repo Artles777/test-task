@@ -7,6 +7,14 @@
                 name="push-comment"
                 v-if="getNext"
                 form="add-comment"
+                :disabled="
+                    !fotosCount
+                    || !messageCount
+                    || !ratingSpeedCount
+                    || !ratingSpeedVideoCount
+                    || !ratingQualityCount
+                    || !ratingPunctualityCount
+                "
             >
                 Отправить
             </button>
@@ -21,7 +29,15 @@
 import { mapGetters , mapMutations } from 'vuex'
 
 export default {
-    computed: mapGetters(['getNext']),
+    computed: mapGetters([
+        'getNext',
+        'fotosCount',
+        'messageCount',
+        'ratingSpeedCount',
+        'ratingSpeedVideoCount',
+        'ratingQualityCount',
+        'ratingPunctualityCount'
+    ]),
     methods: mapMutations(['updateNext', 'changeNext']),
     mounted () {
         this.updateNext()
@@ -49,6 +65,15 @@ export default {
                 font-weight: 600;
                 letter-spacing: -0.03rem;
                 cursor: pointer;
+
+                &:disabled {
+                    border: 1px solid red;
+                }
+            }
+
+            @media (min-width: 320px) and (max-width: 380px) {
+                margin-left: 16px;
+                margin-right: 16px;
             }
         }
     }
