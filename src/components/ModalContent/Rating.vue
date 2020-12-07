@@ -5,7 +5,7 @@
         </label>
         <div class="modal__content_rating-stars">
             <span 
-                v-for="star of stars"
+                v-for="star of fieldInfo.stars"
                 :key="star.id"
                 @click="check(star)"
                 :class="{checked: star.checked}"
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
     props: {
         fieldInfo: {
@@ -23,25 +25,22 @@ export default {
             requered: true
         }
     },
-    data () {
-        return {
-            stars: [
-                { id: 5, checked: false },
-                { id: 4, checked: false },
-                { id: 3, checked: false },
-                { id: 2, checked: false },
-                { id: 1, checked: false }
-            ]
-        }
-    },
+    computed: mapGetters(['getRating', 'getDataRating']),
     methods: {
+        ...mapMutations(['updateRating']),
         check (star) {
-            this.stars.forEach(el => el.checked = false)
+            this.fieldInfo.stars.forEach(el => el.checked = false)
             star.checked = true
+            this.updateRating({
+                key: this.fieldInfo.key,
+                title: this.fieldInfo.title,
+                rating: star.id
+            })
+            console.log(this.getDataRating)
         }
     },
     mounted () {
-        this.stars.forEach(el => el.id <= 3 && this.fieldInfo.id === 1 ? el.checked = true : '')
+        this.fieldInfo.stars.forEach(el => el.id <= 3 && this.fieldInfo.id === 1 ? el.checked = true : '')
     }
 }
 </script>
@@ -52,17 +51,6 @@ export default {
     .modal {
         &__content {
             &_rating {
-
-                // &:first-of-type {
-                //     & > div {
-                //         & > span {
-                //             &:nth-child(3) ~ span, &:nth-child(3) {
-                //                 color: #53C6D1;
-                //             }
-                //         }
-                //     }
-                // }
-
                 &-stars {
                     margin-top: 8px;
                     direction: rtl;

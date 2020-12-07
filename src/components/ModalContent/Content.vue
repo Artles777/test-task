@@ -25,11 +25,13 @@ export default {
 
     .modal {
         &__content {
+            margin: 22px 32px 13px 32px;
+
             @media (min-width: 320px) and (max-width: 380px) {
                 margin-top: 14px;
+                margin-left: 16px;
+                margin-right: 16px;
             }
-
-            margin: 22px 32px 20px 32px;
         }
     }
 </style>

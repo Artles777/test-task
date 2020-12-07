@@ -53,6 +53,10 @@ export default {
             left: 0;
             width: 100%;
             background: #666666;
+
+            @media screen and (min-width: 1300px) {
+                bottom: 0;
+            }
         }
 
         &__wrapper {
@@ -65,6 +69,7 @@ export default {
             border-radius: 16px;
             margin: 56px 0;
             position: relative;
+            width: 560px;
 
             & hr {
                 &:first-of-type {
@@ -80,7 +85,7 @@ export default {
 
             @media screen and (min-width: 1300px) {
                 max-width: 560px;
-                width: 560px;
+                height: 656px;
             }
 
             @media (min-width: 320px) and (max-width: 380px) {
@@ -89,13 +94,6 @@ export default {
                 border-bottom-right-radius: 0;
                 border-bottom-left-radius: 0;
                 margin-bottom: 0;
-            }
-        }
-
-        &__content, &__footer {
-            @media (min-width: 320px) and (max-width: 380px) {
-                margin-left: 16px;
-                margin-right: 16px;
             }
         }
     }
